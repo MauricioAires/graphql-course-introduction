@@ -1,0 +1,24 @@
+{
+  "name": "graphql-course-introduction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MauricioAires/graphql-course-introduction.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MauricioAires/graphql-course-introduction/issues"
+  },
+  "homepage": "https://github.com/MauricioAires/graphql-course-introduction#readme",
+  "dependencies": {
+    "apollo-server": "^3.12.0",
+    "graphql": "^16.6.0"
+  }
+}
