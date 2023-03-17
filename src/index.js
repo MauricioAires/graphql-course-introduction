@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
+import { typeDefs, resolvers } from './graphql/schema';
 
 /**
  * NOTE: Tipos scalars são tipos primitivos de dados que representam valores únicos,
@@ -16,39 +17,8 @@ import { ApolloServer, gql } from 'apollo-server';
  * apos o tipo String! dessa forma irá gerar um erro caso o valor seja null
  */
 const server = new ApolloServer({
-  typeDefs: gql`
-    type Query {
-      user: User!
-      users: [User!]!
-    }
-
-    type User {
-      id: ID!
-      userName: String!
-    }
-  `,
-  resolvers: {
-    Query: {
-      user: () => {
-        return {
-          id: '1',
-          userName: 'Mauricio Aires',
-        };
-      },
-      users: () => {
-        return [
-          {
-            id: '1',
-            userName: 'Mauricio Aires',
-          },
-          {
-            id: '2',
-            userName: 'Marjoany Dantas',
-          },
-        ];
-      },
-    },
-  },
+  typeDefs,
+  resolvers,
 });
 
 server.listen(4003).then(({ url }) => {
