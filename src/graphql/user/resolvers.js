@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 /**
  *
  * @param {*} obj
@@ -8,18 +6,25 @@ import axios from 'axios';
  * os resolvers
  * @returns
  */
-const users = async (obj, arg, context, info) => {
-  const response = await axios.get('http://localhost:3000/users');
+const users = async (obj, arg, { api }, info) => {
+  const response = await api.get('/users');
   const { data } = response;
 
   return data;
 };
 
-const user = async () => {
-  return {
-    id: '1',
-    userName: 'Mauricio Aires',
-  };
+/**
+ *
+ * @param {*} obj
+ * @param {*} arg são os dados que são passados via props na query
+ * @param {*} params
+ * @returns
+ */
+const user = async (obj, { id }, { api }) => {
+  const response = await api.get(`/users/${id}`);
+  const { data } = response;
+
+  return data;
 };
 
 export const userResolvers = {
