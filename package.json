@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -r sucrase/register src/index.js"
+    "dev": "nodemon -r sucrase/register src/index.js",
+    "server": "json-server --watch db.json"
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,12 @@
     "graphql": "^16.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21",
-    "sucrase": "^3.29.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.4"
+    "json-server": "^0.17.2",
+    "nodemon": "^2.0.21",
+    "prettier": "^2.8.4",
+    "sucrase": "^3.29.0"
   }
 }
