@@ -8,7 +8,7 @@ import axios from 'axios';
  * os resolvers
  * @returns
  */
-const users = async (obj, arg, context) => {
+const users = async (obj, arg, context, info) => {
   const response = await axios.get('http://localhost:3000/users');
   const { data } = response;
 
