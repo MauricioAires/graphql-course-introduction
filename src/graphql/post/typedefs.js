@@ -9,5 +9,9 @@ export const postTypeDefs = gql`
   type Post {
     id: ID!
     title: String!
+    body: String!
+    #userId:
+    indexRef: Int!
+    createdAt: String!
   }
 `;
