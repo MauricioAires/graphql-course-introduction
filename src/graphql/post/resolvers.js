@@ -1,21 +1,17 @@
-export const post = () => {
-  return {
-    id: '1',
-    title: 'title',
-  };
+export const post = async (obj, { id }, { getPosts }, info) => {
+  const response = await getPosts(`/${id}`);
+
+  const { data } = response;
+
+  return data;
 };
 
-export const posts = () => {
-  return [
-    {
-      id: '1',
-      title: 'title',
-    },
-    {
-      id: '2',
-      title: 'title',
-    },
-  ];
+export const posts = async (obj, args, { getPosts }, info) => {
+  const response = await getPosts();
+
+  const { data } = response;
+
+  return data;
 };
 
 export const postResolvers = {
