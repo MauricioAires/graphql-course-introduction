@@ -1,7 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import { typeDefs, resolvers } from './graphql/schema';
-
-import { api } from './lib/axios';
+import { context } from './context';
 
 /**
  * NOTE: Tipos scalars são tipos primitivos de dados que representam valores únicos,
@@ -21,11 +20,7 @@ import { api } from './lib/axios';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => {
-    return {
-      api,
-    };
-  },
+  context,
 });
 
 server.listen(4003).then(({ url }) => {
