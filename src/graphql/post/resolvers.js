@@ -4,18 +4,22 @@ export const post = async (obj, { id }, { getPosts }, info) => {
 
     const { data } = response;
 
-    if (typeof data.id === 'undefined') {
+    return data;
+  } catch (err) {
+    const { data } = err;
+
+    if (data === undefined) {
       return {
         statusCode: 404,
-        message: 'post not found!',
+        message: 'not found error!',
+        postId: id,
       };
     }
 
-    return data;
-  } catch (err) {
     return {
-      statusCode: 404,
-      message: 'post not found!',
+      statusCode: 500,
+      message: 'timeout error!',
+      timeout: 300,
     };
   }
 };
@@ -45,24 +49,37 @@ export const posts = async (obj, { inputs }, { getPosts }, info) => {
  * nome e sobre nome
  */
 export const postResolvers = {
+  // NOME DO TYPE
   Query: {
     post,
     posts,
   },
+  // NOME DO TYPE
   Post: {
     unixTimestamp: ({ createdAt }) => {
       return new Date(createdAt).getTime();
     },
   },
+  //  NOME DO UNION
   PostResult: {
     __resolveType: (obj) => {
-      if (typeof obj.statusCode !== 'undefined') return 'PostNotFoundError';
+      if (typeof obj.postId !== 'undefined') return 'PostNotFoundError';
+      if (typeof obj.timeout !== 'undefined') return 'PostTimeoutError';
       if (typeof obj.id !== 'undefined') return 'Post';
 
       /**
        * NOTE: Caso não retorne um valor e retorne null o graphQL vai gerar seu
        * próprio error
        */
+      return null; // GraphQLError is thrown
+    },
+  },
+  // NOME DA INTERFACE
+  PostError: {
+    __resolveType: (obj) => {
+      if (typeof obj.postId !== 'undefined') return 'PostNotFoundError';
+      if (typeof obj.timeout !== 'undefined') return 'PostTimeoutError';
+
       return null; // GraphQLError is thrown
     },
   },
