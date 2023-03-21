@@ -6,8 +6,10 @@ export const post = async (obj, { id }, { getPosts }, info) => {
   return data;
 };
 
-export const posts = async (obj, args, { getPosts }, info) => {
-  const response = await getPosts();
+export const posts = async (obj, { inputs }, { getPosts }, info) => {
+  const apiFiltersInputs = new URLSearchParams(inputs);
+
+  const response = await getPosts(`/?${apiFiltersInputs}`);
 
   const { data } = response;
 

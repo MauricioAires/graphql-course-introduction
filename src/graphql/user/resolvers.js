@@ -6,8 +6,10 @@
  * os resolvers
  * @returns
  */
-const users = async (obj, arg, { getUsers }, info) => {
-  const response = await getUsers();
+const users = async (obj, { inputs }, { getUsers }, info) => {
+  const apiFiltersInputs = new URLSearchParams(inputs);
+
+  const response = await getUsers(`/?${apiFiltersInputs}`);
   const { data } = response;
 
   return data;
