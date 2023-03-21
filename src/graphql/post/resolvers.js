@@ -1,9 +1,23 @@
 export const post = async (obj, { id }, { getPosts }, info) => {
-  const response = await getPosts(`/${id}`);
+  try {
+    const response = await getPosts(`/${id}`);
 
-  const { data } = response;
+    const { data } = response;
 
-  return data;
+    if (typeof data.id === 'undefined') {
+      return {
+        statusCode: 404,
+        message: 'post not found!',
+      };
+    }
+
+    return data;
+  } catch (err) {
+    return {
+      statusCode: 404,
+      message: 'post not found!',
+    };
+  }
 };
 
 export const posts = async (obj, { inputs }, { getPosts }, info) => {
@@ -38,6 +52,18 @@ export const postResolvers = {
   Post: {
     unixTimestamp: ({ createdAt }) => {
       return new Date(createdAt).getTime();
+    },
+  },
+  PostResult: {
+    __resolveType: (obj) => {
+      if (typeof obj.statusCode !== 'undefined') return 'PostNotFoundError';
+      if (typeof obj.id !== 'undefined') return 'Post';
+
+      /**
+       * NOTE: Caso não retorne um valor e retorne null o graphQL vai gerar seu
+       * próprio error
+       */
+      return null; // GraphQLError is thrown
     },
   },
 };
