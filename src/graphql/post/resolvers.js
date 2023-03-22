@@ -1,6 +1,3 @@
-import axios from 'axios';
-import DataLoader from 'dataloader';
-
 // export const post = async (obj, { id }, { getPosts }, info) => {
 //   try {
 //     const response = await getPosts(`/${id}`);
@@ -66,27 +63,7 @@ export const posts = async (obj, { inputs }, { getPosts }, info) => {
  * context => são as informação compartilhadas pelo Apollo Server (nas suas definições)
  */
 
-/**
- * NOTE: O DataLoader faz cache das chamadas API
- */
-
-/**
- * NOTE: é interessante que seja feito o cache apneas durante a consulta e quando
- * a consulta seja finalizado o cache deve ser removido.
- */
-const userDataLoader = new DataLoader(async (ids) => {
-  const urlQuery = ids.join('&id=');
-
-  const url = `http://localhost:3000/users?id=${urlQuery}`;
-
-  const response = await axios.get(url);
-
-  const { data } = response;
-
-  return ids.map((id) => data.find((user) => user.id === id));
-});
-
-const user = async (obj, arg, context, info) => {
+const user = async (obj, arg, { userDataLoader }, info) => {
   const { userId } = obj;
 
   return userDataLoader.load(userId);
