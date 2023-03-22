@@ -24,22 +24,16 @@
 //   }
 // };
 
-export const post = async (obj, { id }, { getPosts }, info) => {
-  const response = await getPosts(`/${id}`);
+export const post = async (obj, { id }, { dataSources }, info) => {
+  const post = dataSources.postsApi.getPost(id);
 
-  const { data } = response;
-
-  return data;
+  return post;
 };
 
-export const posts = async (obj, { inputs }, { getPosts }, info) => {
-  const apiFiltersInputs = new URLSearchParams(inputs);
+export const posts = async (obj, { inputs }, { dataSources }, info) => {
+  const response = dataSources.postsApi.getPosts('', inputs);
 
-  const response = await getPosts(`/?${apiFiltersInputs}`);
-
-  const { data } = response;
-
-  return data;
+  return response;
 };
 
 /**

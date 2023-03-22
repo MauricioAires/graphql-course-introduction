@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
 import { apiFiltersResolvers, apiFiltersTypeDefs } from './api-filters';
-import { postTypeDefs, postResolvers } from './post';
+import { postTypeDefs, postResolvers, PostsApi } from './post';
 import { userTypeDefs, userResolvers } from './user';
 
 const rootTypeDefs = gql`
@@ -27,3 +27,9 @@ export const resolvers = [
   postResolvers,
   apiFiltersResolvers,
 ];
+
+export const dataSources = () => {
+  return {
+    postsApi: new PostsApi(),
+  };
+};
