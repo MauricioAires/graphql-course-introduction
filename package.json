@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/MauricioAires/graphql-course-introduction#readme",
   "dependencies": {
+    "apollo-datasource-rest": "^3.7.0",
     "apollo-server": "^3.12.0",
     "axios": "^1.3.4",
     "dataloader": "^2.2.2",
