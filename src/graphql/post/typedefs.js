@@ -2,29 +2,29 @@ import { gql } from 'apollo-server';
 
 export const postTypeDefs = gql`
   extend type Query {
-    post(id: ID!): PostResult!
+    post(id: ID!): Post!
     posts(inputs: ApiFiltersInput): [Post!]!
   }
 
-  union PostResult = PostNotFoundError | PostTimeoutError | Post
+  # union PostResult = PostNotFoundError | PostTimeoutError | Post
 
-  # NÃO É POSSÍVEL ADICIONAR UMA INTERFACE EM UM UNION
-  interface PostError {
-    statusCode: Int!
-    message: String!
-  }
+  # # NÃO É POSSÍVEL ADICIONAR UMA INTERFACE EM UM UNION
+  # interface PostError {
+  #   statusCode: Int!
+  #   message: String!
+  # }
 
-  type PostNotFoundError implements PostError {
-    statusCode: Int!
-    message: String!
-    postId: String!
-  }
+  # type PostNotFoundError implements PostError {
+  #   statusCode: Int!
+  #   message: String!
+  #   postId: String!
+  # }
 
-  type PostTimeoutError implements PostError {
-    statusCode: Int!
-    message: String!
-    timeout: Int!
-  }
+  # type PostTimeoutError implements PostError {
+  #   statusCode: Int!
+  #   message: String!
+  #   timeout: Int!
+  # }
 
   type Post {
     id: ID!
