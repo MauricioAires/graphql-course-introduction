@@ -1,8 +1,11 @@
 import { api } from './lib/axios';
 
+import { getUsers, makeUserDataLoader } from './graphql/user';
+
 export const context = () => {
   return {
-    getUsers: (path = '') => api.get(`/users${path}`),
+    userDataLoader: makeUserDataLoader(getUsers(api)),
+    getUsers: getUsers(api),
     getPosts: (path = '') => api.get(`/posts${path}`),
   };
 };
