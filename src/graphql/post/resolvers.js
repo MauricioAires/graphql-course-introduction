@@ -56,18 +56,38 @@ export const posts = async (obj, { inputs }, { getPosts }, info) => {
  * objeto, dessa forma pode ser utilizado para formatar valores ou concatenar um
  * nome e sobre nome
  */
+
+/**
+ * NOTE: object => são os dados do objeto resolvido no resolver top level
+ * args => são os parâmetros repassados do front end
+ * context => são as informação compartilhadas pelo Apollo Server (nas suas definições)
+ */
+const user = async (obj, arg, { getUsers }, info) => {
+  const { userId } = obj;
+
+  const response = await getUsers(`/${userId}`);
+
+  const { data } = response;
+
+  return data;
+};
+
 export const postResolvers = {
-  // NOME DO TYPE
+  // NOME DO TYPE => Resolvers de entrada
   Query: {
     post,
     posts,
   },
-  // NOME DO TYPE
+  // NOTE: Resolvers trivial
   Post: {
-    unixTimestamp: ({ createdAt }) => {
-      return new Date(createdAt).getTime();
-    },
+    user,
   },
+  // NOME DO TYPE
+  // Post: {
+  //   unixTimestamp: ({ createdAt }) => {
+  //     return new Date(createdAt).getTime();
+  //   },
+  // },
   //  NOME DO UNION
   // PostResult: {
   //   __resolveType: (obj) => {
