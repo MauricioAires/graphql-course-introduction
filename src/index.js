@@ -2,6 +2,10 @@ import { ApolloServer } from 'apollo-server';
 import { typeDefs, resolvers } from './graphql/schema';
 import { context } from './context';
 
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 /**
  * NOTE: Tipos scalars são tipos primitivos de dados que representam valores únicos,
  * como String, Int, Float, Boolean e ID. Eles são usados para definir
