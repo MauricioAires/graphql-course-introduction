@@ -29,9 +29,18 @@ const user = async (obj, { id }, { getUsers }) => {
   return data;
 };
 
+const posts = async (obj, arg, { postDataLoader }, info) => {
+  const { id } = obj;
+
+  return postDataLoader.load(id);
+};
+
 export const userResolvers = {
   Query: {
     user,
     users,
+  },
+  User: {
+    posts,
   },
 };
