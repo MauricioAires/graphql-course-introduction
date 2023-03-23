@@ -29,10 +29,10 @@ const user = async (obj, { id }, { getUsers }) => {
   return data;
 };
 
-const posts = async (obj, arg, { postDataLoader }, info) => {
+const posts = async (obj, arg, { dataSources }, info) => {
   const { id } = obj;
 
-  return postDataLoader.load(id);
+  return dataSources.postsApi.postDataLoaderUserId(id);
 };
 
 export const userResolvers = {

@@ -6,9 +6,7 @@ export const makePostDataLoader = (getPosts) => {
     const urlQuery = ids.join('&userId=');
     const url = `/?userId=${urlQuery}`;
 
-    const response = await getPosts(url);
-
-    const { data } = response;
+    const data = await getPosts(url);
 
     // NOTE: map porque eu previso retornar um valor para cada id de usuário
     return ids.map((id) => {
