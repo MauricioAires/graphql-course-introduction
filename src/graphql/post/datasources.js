@@ -8,10 +8,18 @@ export class PostsApi extends RESTDataSource {
   }
 
   async getPosts(urlParams = {}) {
-    return this.get('', urlParams);
+    return this.get('', urlParams, {
+      cacheOptions: {
+        ttl: 60 * 1, // 1 Minuto
+      },
+    });
   }
 
   async getPost(id) {
-    return this.get(id);
+    return this.get(id, undefined, {
+      cacheOptions: {
+        ttl: 60 * 1, // 1 Minuto
+      },
+    });
   }
 }
