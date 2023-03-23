@@ -19,3 +19,19 @@ npm install sucrase -D
 ```bash
 npm install nodemon -D
 ```
+
+### Utilização
+
+Para rodar a aplicação em modo de desenvolvimento, utilize o seguinte comando:
+
+Para iniciar o Apollo Server
+
+```bash
+  $ npm run dev
+```
+
+Para iniciar o JSON-Server
+
+```bash
+  $ npm run server
+```
