@@ -57,10 +57,10 @@ export const posts = async (obj, { inputs }, { dataSources }, info) => {
  * context => são as informação compartilhadas pelo Apollo Server (nas suas definições)
  */
 
-const user = async (obj, arg, { userDataLoader }, info) => {
+const user = async (obj, arg, { dataSources }, info) => {
   const { userId } = obj;
 
-  return userDataLoader.load(userId);
+  return dataSources.usersApi.userDataLoaderPostId(userId);
 };
 
 export const postResolvers = {

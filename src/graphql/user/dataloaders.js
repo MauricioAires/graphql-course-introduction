@@ -11,12 +11,9 @@ import DataLoader from 'dataloader';
 export const makeUserDataLoader = (getUsers) => {
   return new DataLoader(async (ids) => {
     const urlQuery = ids.join('&id=');
+    const url = `?id=${urlQuery}`;
 
-    const url = `/?id=${urlQuery}`;
-
-    const response = await getUsers(url);
-
-    const { data } = response;
+    const data = await getUsers(url);
 
     return ids.map((id) => data.find((user) => user.id === id));
   });
