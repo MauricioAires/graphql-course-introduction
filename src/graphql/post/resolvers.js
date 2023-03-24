@@ -48,6 +48,10 @@ const createPost = async (obj, { data }, { dataSources }, info) => {
   return dataSources.postsApi.createPost(data);
 };
 
+const updatePost = async (obj, { postId, data }, { dataSources }, info) => {
+  return dataSources.postsApi.updatePost(postId, data);
+};
+
 /*****************************************
  *  FIELD RESOLVERS
  *****************************************/
@@ -87,6 +91,7 @@ export const postResolvers = {
   },
   Mutation: {
     createPost,
+    updatePost,
   },
 
   // NOTE: Resolvers trivial
