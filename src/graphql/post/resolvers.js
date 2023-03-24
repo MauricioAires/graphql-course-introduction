@@ -44,17 +44,8 @@ export const posts = async (obj, { inputs }, { dataSources }, info) => {
  *  MUTATION RESOLVERS
  *****************************************/
 
-const createPost = async (obj, args, { dataSources }, info) => {
-  console.log({ args });
-
-  return {
-    id: '342',
-    title: 'Maiores ex tempore quo qui.',
-    body: 'Earum natus quis possimus iusto voluptatem dicta. Facilis voluptate minima architecto similique quas. Tempora illum omnis aut et id minima nihil itaque quo. Dicta ratione ut voluptates quia harum voluptates qui.\n \rVoluptas velit qui eum sit voluptatem animi aut provident enim. Sed magnam reiciendis. Natus et fugit omnis quaerat iusto iste aliquam dignissimos magnam.',
-    userId: '115',
-    indexRef: 4,
-    createdAt: '2016-06-05T20:17:46.223Z',
-  };
+const createPost = async (obj, { data }, { dataSources }, info) => {
+  return dataSources.postsApi.createPost(data);
 };
 
 /*****************************************
