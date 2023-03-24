@@ -11,7 +11,7 @@ import DataLoader from 'dataloader';
 export const makeUserDataLoader = (getUsers) => {
   return new DataLoader(async (ids) => {
     const urlQuery = ids.join('&id=');
-    const url = `?id=${urlQuery}`;
+    const url = `id=${urlQuery}`;
 
     const data = await getUsers(url);
 

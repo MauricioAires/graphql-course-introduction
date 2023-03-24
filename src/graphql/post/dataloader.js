@@ -4,7 +4,7 @@ export const makePostDataLoader = (getPosts) => {
   // NOTE: id dos usuários
   return new DataLoader(async (ids) => {
     const urlQuery = ids.join('&userId=');
-    const url = `/?userId=${urlQuery}`;
+    const url = `userId=${urlQuery}`;
 
     const data = await getPosts(url);
 
