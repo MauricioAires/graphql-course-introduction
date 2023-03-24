@@ -52,6 +52,10 @@ const updatePost = async (obj, { postId, data }, { dataSources }, info) => {
   return dataSources.postsApi.updatePost(postId, data);
 };
 
+const deletePost = async (obj, { postId }, { dataSources }, info) => {
+  return dataSources.postsApi.deletePost(postId);
+};
+
 /*****************************************
  *  FIELD RESOLVERS
  *****************************************/
@@ -92,6 +96,7 @@ export const postResolvers = {
   Mutation: {
     createPost,
     updatePost,
+    deletePost,
   },
 
   // NOTE: Resolvers trivial
