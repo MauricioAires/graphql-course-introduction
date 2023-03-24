@@ -1,3 +1,7 @@
+/*****************************************
+ *  QUERY RESOLVERS
+ *****************************************/
+
 // export const post = async (obj, { id }, { getPosts }, info) => {
 //   try {
 //     const response = await getPosts(`/${id}`);
@@ -36,6 +40,27 @@ export const posts = async (obj, { inputs }, { dataSources }, info) => {
   return response;
 };
 
+/*****************************************
+ *  MUTATION RESOLVERS
+ *****************************************/
+
+const createPost = async (obj, args, { dataSources }, info) => {
+  console.log({ args });
+
+  return {
+    id: '342',
+    title: 'Maiores ex tempore quo qui.',
+    body: 'Earum natus quis possimus iusto voluptatem dicta. Facilis voluptate minima architecto similique quas. Tempora illum omnis aut et id minima nihil itaque quo. Dicta ratione ut voluptates quia harum voluptates qui.\n \rVoluptas velit qui eum sit voluptatem animi aut provident enim. Sed magnam reiciendis. Natus et fugit omnis quaerat iusto iste aliquam dignissimos magnam.',
+    userId: '115',
+    indexRef: 4,
+    createdAt: '2016-06-05T20:17:46.223Z',
+  };
+};
+
+/*****************************************
+ *  FIELD RESOLVERS
+ *****************************************/
+
 /**
  * Em GraphQL, um resolvedor trivial é uma função que é capaz de retornar
  * diretamente o valor desejado sem precisar realizar nenhum processamento
@@ -69,10 +94,15 @@ export const postResolvers = {
     post,
     posts,
   },
+  Mutation: {
+    createPost,
+  },
+
   // NOTE: Resolvers trivial
   Post: {
     user,
   },
+
   // NOME DO TYPE
   // Post: {
   //   unixTimestamp: ({ createdAt }) => {

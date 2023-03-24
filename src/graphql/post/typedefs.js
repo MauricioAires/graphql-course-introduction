@@ -8,6 +8,10 @@ export const postTypeDefs = gql`
     posts(inputs: ApiFiltersInput): [Post!]!
   }
 
+  extend type Mutation {
+    createPost(data: CreatePostInput!): Post!
+  }
+
   # union PostResult = PostNotFoundError | PostTimeoutError | Post
 
   # NOTE: NÃO É POSSÍVEL ADICIONAR UMA INTERFACE EM UM UNION
@@ -41,5 +45,11 @@ export const postTypeDefs = gql`
     indexRef: Int!
     createdAt: String!
     # unixTimestamp: String!
+  }
+
+  input CreatePostInput {
+    title: String!
+    body: String!
+    userId: String!
   }
 `;

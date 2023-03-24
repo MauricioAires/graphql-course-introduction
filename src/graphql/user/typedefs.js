@@ -6,10 +6,6 @@ export const userTypeDefs = gql`
     users(inputs: ApiFiltersInput): [User!]!
   }
 
-  extend type Mutation {
-    createPost(id: ID!): Post!
-  }
-
   type User {
     id: ID!
     firstName: String!
