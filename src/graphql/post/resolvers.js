@@ -35,7 +35,7 @@ export const post = async (obj, { id }, { dataSources }, info) => {
 };
 
 export const posts = async (obj, { inputs }, { dataSources }, info) => {
-  const response = dataSources.postsApi.getPosts('', inputs);
+  const response = dataSources.postsApi.getPosts(inputs);
 
   return response;
 };
