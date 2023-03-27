@@ -1,7 +1,7 @@
 import { ValidationError } from 'apollo-server';
 
 export const createUserFn = async (userData, dataSource) => {
-  checkUserFields(userData, true);
+  await checkUserFields(userData, true);
 
   const indexRefUser = await dataSource.get('', {
     limit: 1,
@@ -27,7 +27,7 @@ export const createUserFn = async (userData, dataSource) => {
 };
 
 export const updateUserFn = async (userId, userData, dataSource) => {
-  checkUserFields(userData, false);
+  await checkUserFields(userData, false);
 
   if (!userId) {
     throw new ValidationError(`Missing userId`);
