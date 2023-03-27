@@ -33,6 +33,18 @@ const user = async (obj, { id }, { dataSources }) => {
  *  MUTATION RESOLVERS
  *****************************************/
 
+const createUser = async (obj, { data }, { dataSources }, info) => {
+  return dataSources.usersApi.createUser(data);
+};
+
+const updateUser = async (obj, { userId, data }, { dataSources }, info) => {
+  return dataSources.usersApi.updateUser(userId, data);
+};
+
+const deleteUser = async (obj, { userId }, { dataSources }, info) => {
+  return dataSources.usersApi.deleteUser(userId);
+};
+
 /*****************************************
  *  FIELD RESOLVERS
  *****************************************/
@@ -47,6 +59,12 @@ export const userResolvers = {
   Query: {
     user,
     users,
+  },
+
+  Mutation: {
+    createUser,
+    updateUser,
+    deleteUser,
   },
 
   User: {
