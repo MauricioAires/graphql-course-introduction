@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import { typeDefs, resolvers, dataSources } from './graphql/schema';
+import { context } from './graphql/context'
 
 import * as dotenv from 'dotenv';
 
@@ -23,8 +24,8 @@ dotenv.config();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-
   dataSources,
+  context
 });
 
 server.listen(4003).then(({ url }) => {
