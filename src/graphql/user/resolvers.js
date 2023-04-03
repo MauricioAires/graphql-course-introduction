@@ -1,8 +1,8 @@
+import { checkOwner } from './utils/auth-functions'
+
 /*****************************************
  *  QUERIES RESOLVERS
  *****************************************/
-
-import { AuthenticationError } from "apollo-server";
 
 /**
  *
@@ -41,25 +41,14 @@ const createUser = async (obj, { data }, { dataSources }, info) => {
 
 const updateUser = async (obj, { userId, data }, { dataSources, loggedUserId }, info) => {
 
-  if (!loggedUserId) {
-    throw new AuthenticationError('You must be logged in!');
-  }
-
-  if (loggedUserId !== userId) {
-    throw new AuthenticationError('You cannot update this user!');
-  }
+  checkOwner(userId, loggedUserId)
 
   return dataSources.usersApi.updateUser(userId, data);
 };
 
 const deleteUser = async (obj, { userId }, { dataSources, loggedUserId }, info) => {
-  if (!loggedUserId) {
-    throw new AuthenticationError('You must be logged in!');
-  }
 
-  if (loggedUserId !== userId) {
-    throw new AuthenticationError('You cannot delete this user!');
-  }
+  checkOwner(userId, loggedUserId)
 
   return dataSources.usersApi.deleteUser(userId);
 };
