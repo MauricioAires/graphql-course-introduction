@@ -2,6 +2,8 @@
  *  QUERY RESOLVERS
  *****************************************/
 
+import { AuthenticationError } from "apollo-server";
+
 // export const post = async (obj, { id }, { getPosts }, info) => {
 //   try {
 //     const response = await getPosts(`/${id}`);
@@ -28,13 +30,22 @@
 //   }
 // };
 
-export const post = async (obj, { id }, { dataSources }, info) => {
+export const post = async (obj, { id }, { dataSources, loggedUserId }, info) => {
+
+
+  if (!loggedUserId) {
+    throw new AuthenticationError('You must be logged in!');
+  }
+
   const post = dataSources.postsApi.getPost(id);
 
   return post;
 };
 
 export const posts = async (obj, { inputs }, { dataSources }, info) => {
+
+
+
   const response = dataSources.postsApi.getPosts(inputs);
 
   return response;
