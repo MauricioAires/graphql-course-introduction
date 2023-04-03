@@ -1,4 +1,4 @@
-import { checkOwner } from './utils/auth-functions'
+import { checkOwner } from '../login/utils/auth-functions'
 
 /*****************************************
  *  QUERIES RESOLVERS
