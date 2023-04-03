@@ -52,7 +52,15 @@ const updateUser = async (obj, { userId, data }, { dataSources, loggedUserId }, 
   return dataSources.usersApi.updateUser(userId, data);
 };
 
-const deleteUser = async (obj, { userId }, { dataSources }, info) => {
+const deleteUser = async (obj, { userId }, { dataSources, loggedUserId }, info) => {
+  if (!loggedUserId) {
+    throw new AuthenticationError('You must be logged in!');
+  }
+
+  if (loggedUserId !== userId) {
+    throw new AuthenticationError('You cannot delete this user!');
+  }
+
   return dataSources.usersApi.deleteUser(userId);
 };
 
