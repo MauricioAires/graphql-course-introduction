@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
+import { UsersApi } from './user'
 
-const authorizedUser = (req) => {
+const authorizedUser = async (req) => {
   const { headers } = req
   const { authorization } = headers
 
@@ -10,10 +11,27 @@ const authorizedUser = (req) => {
 
     const { userId } = jwt.verify(token, process.env.JWT_SECRET)
 
+    const usersApi = new UsersApi()
+
+    /**
+     * NOTE: como o data source está sendo utilizado, fora do
+     * contexto do graphQL é necessário que execute a função initialize
+     * manualmente.
+     */
+    usersApi.initialize({})
+
+    const foundUser = await usersApi.getUser(userId)
+
+
+
+    if (foundUser.token !== token) {
+      return ''
+    }
+
     return userId
 
-  } catch (error) {
-
+  } catch (err) {
+    console.log(err)
     return ''
   }
 
@@ -23,11 +41,11 @@ const authorizedUser = (req) => {
 /**
  * NOTE: Essa função será executada a cada requisição
  */
-export const context = ({ req }) => {
+export const context = async ({ req }) => {
 
 
 
-  const loggedUserId = authorizedUser(req);
+  const loggedUserId = await authorizedUser(req);
 
   return {
     loggedUserId

@@ -23,6 +23,7 @@ export class UsersApi extends RESTDataSource {
   }
 
   async getUser(id) {
+
     return this.get(id, undefined, {
       cacheOptions: {
         ttl: 60 * 1, // 1 Minuto

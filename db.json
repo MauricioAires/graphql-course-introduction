@@ -171,12 +171,22 @@
     },
     {
       "firstName": "Mauricio",
-      "lastName": "Aires",
+      "lastName": "Aires Freitas",
       "userName": "mauricio.aires",
       "passwordHash": "$2b$12$OHjnBwDaf38LkU.Z68M0DOAucT59.VzfF1b0hs2PxjR9F/dk8tSbC",
       "indexRef": 22,
       "createdAt": "2023-03-27T16:44:51.193Z",
-      "id": "mOwrTbb"
+      "id": "mOwrTbb",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJtT3dyVGJiIiwiaWF0IjoxNjgwNTQ4OTYzLCJleHAiOjE2ODA2MzUzNjN9.95fze3_-N6b5fITvL5_mODzGAbXNVHV9xA1ajNtjri0"
+    },
+    {
+      "firstName": "Mauricio",
+      "lastName": "Aires",
+      "userName": "ana-vitoria",
+      "passwordHash": "$2b$12$Fn8EJGhwPAZGi92wiKL6de1eTcn2sab.srVE6rE4Do2WuBx7WZg8q",
+      "indexRef": 23,
+      "createdAt": "2023-04-03T18:39:15.416Z",
+      "id": "z6we4Gp"
     }
   ],
   "posts": [
