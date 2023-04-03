@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server';
 import { apiFiltersResolvers, apiFiltersTypeDefs } from './api-filters';
+import { loginTypeDefs, loginResolvers, LoginApi, } from './login';
 import { postTypeDefs, postResolvers, PostsApi } from './post';
 import { userTypeDefs, userResolvers, UsersApi } from './user';
 
@@ -26,12 +27,14 @@ export const typeDefs = [
   rootTypeDefs,
   userTypeDefs,
   postTypeDefs,
+  loginTypeDefs,
   apiFiltersTypeDefs,
 ];
 export const resolvers = [
   rootResolvers,
   userResolvers,
   postResolvers,
+  loginResolvers,
   apiFiltersResolvers,
 ];
 
@@ -39,5 +42,6 @@ export const dataSources = () => {
   return {
     postsApi: new PostsApi(),
     usersApi: new UsersApi(),
+    loginApi: new LoginApi()
   };
 };
