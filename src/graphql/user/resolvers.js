@@ -2,6 +2,8 @@
  *  QUERIES RESOLVERS
  *****************************************/
 
+import { AuthenticationError } from "apollo-server";
+
 /**
  *
  * @param {*} obj
@@ -37,7 +39,16 @@ const createUser = async (obj, { data }, { dataSources }, info) => {
   return dataSources.usersApi.createUser(data);
 };
 
-const updateUser = async (obj, { userId, data }, { dataSources }, info) => {
+const updateUser = async (obj, { userId, data }, { dataSources, loggedUserId }, info) => {
+
+  if (!loggedUserId) {
+    throw new AuthenticationError('You must be logged in!');
+  }
+
+  if (loggedUserId !== userId) {
+    throw new AuthenticationError('You cannot update this user!');
+  }
+
   return dataSources.usersApi.updateUser(userId, data);
 };
 
