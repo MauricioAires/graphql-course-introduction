@@ -159,6 +159,24 @@
       "userName": "marcia_carvalho81",
       "indexRef": 1,
       "createdAt": "2016-12-08T00:49:39.870Z"
+    },
+    {
+      "firstName": "Mauirico",
+      "lastName": "asd",
+      "userName": "muricio.aites",
+      "passwordHash": "$2b$12$0u3hcd..5ykREkq138oKR..ZRwY.jO5z2W18IY2YXdkKv4GUSSeza",
+      "indexRef": 21,
+      "createdAt": "2023-03-27T15:08:31.642Z",
+      "id": "lzYcXnP"
+    },
+    {
+      "firstName": "Mauricio",
+      "lastName": "Aires",
+      "userName": "mauricio.aires",
+      "passwordHash": "$2b$12$OHjnBwDaf38LkU.Z68M0DOAucT59.VzfF1b0hs2PxjR9F/dk8tSbC",
+      "indexRef": 22,
+      "createdAt": "2023-03-27T16:44:51.193Z",
+      "id": "mOwrTbb"
     }
   ],
   "posts": [
