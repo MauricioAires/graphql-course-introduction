@@ -3,6 +3,7 @@
  *****************************************/
 
 import { AuthenticationError } from "apollo-server";
+import { checkIsLoggedIn } from "../login/utils/auth-functions";
 
 // export const post = async (obj, { id }, { getPosts }, info) => {
 //   try {
@@ -30,22 +31,13 @@ import { AuthenticationError } from "apollo-server";
 //   }
 // };
 
-export const post = async (obj, { id }, { dataSources, loggedUserId }, info) => {
-
-
-  if (!loggedUserId) {
-    throw new AuthenticationError('You must be logged in!');
-  }
-
+export const post = async (obj, { id }, { dataSources }, info) => {
   const post = dataSources.postsApi.getPost(id);
 
   return post;
 };
 
 export const posts = async (obj, { inputs }, { dataSources }, info) => {
-
-
-
   const response = dataSources.postsApi.getPosts(inputs);
 
   return response;
@@ -55,11 +47,21 @@ export const posts = async (obj, { inputs }, { dataSources }, info) => {
  *  MUTATION RESOLVERS
  *****************************************/
 
-const createPost = async (obj, { data }, { dataSources }, info) => {
+const createPost = async (obj, { data }, { dataSources, loggedUserId }, info) => {
+
+  checkIsLoggedIn(loggedUserId)
+
+  data.userId = loggedUserId
+
   return dataSources.postsApi.createPost(data);
 };
 
-const updatePost = async (obj, { postId, data }, { dataSources }, info) => {
+const updatePost = async (obj, { postId, data }, { dataSources, loggedUserId }, info) => {
+
+  if (!loggedUserId) {
+    throw new AuthenticationError('You must be logged in!');
+  }
+
   return dataSources.postsApi.updatePost(postId, data);
 };
 

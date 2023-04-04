@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server";
 
-export const checkIsLoggedIn = (userId, loggedUserId) => {
+export const checkIsLoggedIn = (loggedUserId) => {
   if (!loggedUserId) {
     throw new AuthenticationError('You must be logged in!');
   }
