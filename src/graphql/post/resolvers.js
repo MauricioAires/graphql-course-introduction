@@ -58,9 +58,7 @@ const createPost = async (obj, { data }, { dataSources, loggedUserId }, info) =>
 
 const updatePost = async (obj, { postId, data }, { dataSources, loggedUserId }, info) => {
 
-  if (!loggedUserId) {
-    throw new AuthenticationError('You must be logged in!');
-  }
+  checkIsLoggedIn(loggedUserId)
 
   return dataSources.postsApi.updatePost(postId, data);
 };

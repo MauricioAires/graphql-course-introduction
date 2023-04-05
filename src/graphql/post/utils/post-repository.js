@@ -1,4 +1,4 @@
-import { ValidationError } from 'apollo-server';
+import { AuthenticationError, ValidationError } from 'apollo-server';
 
 export const createPostFn = async (postData, dataSource) => {
   const postInfo = await createPostInfo(postData, dataSource);
@@ -15,6 +15,26 @@ export const createPostFn = async (postData, dataSource) => {
 export const updatePostFn = async (postId, postData, dataSource) => {
   if (!postId) {
     throw new ValidationError(`Missing postId`);
+  }
+
+  /**
+   * NOTE: é muito importante que tome cuidado com cache durante
+   * update e delete, dessa forma não é utilizado a função do data source
+   * é chamado direto do banco de dados/api
+   */
+
+  const foundPost = await dataSource.get(postId, undefined, {
+    cacheOptions: {
+      ttl: 0
+    }
+  });
+
+  if (!foundPost) {
+    throw new ValidationError(`Post ${postId} does not exist`);
+  }
+
+  if (foundPost.userId !== dataSource.context.loggedUserId) {
+    throw new AuthenticationError(`You cannot update this post!`);
   }
 
   const { title, body, userId } = postData;
