@@ -78,7 +78,6 @@ const validateUserPassword = async (password) => {
 
   const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/;
 
-  console.log({ password });
 
   if (!password.match(strongPasswordRegex)) {
     throw new UserInputError(
@@ -102,7 +101,6 @@ const checkUserFields = async (user, allFieldsRequired = false) => {
     }
 
     if (field === 'password') {
-      console.log({ user });
       await validateUserPassword(user[field]);
     }
 
