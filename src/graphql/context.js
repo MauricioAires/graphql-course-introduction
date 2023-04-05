@@ -5,6 +5,8 @@ const authorizedUser = async (req) => {
   const { headers } = req
   const { authorization } = headers
 
+  if (authorization === undefined) return ''
+
   try {
 
     const [_bearer, token] = authorization.split(' ')
@@ -31,7 +33,6 @@ const authorizedUser = async (req) => {
     return userId
 
   } catch (err) {
-    console.log(err)
     return ''
   }
 
