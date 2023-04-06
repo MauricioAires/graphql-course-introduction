@@ -18,7 +18,7 @@ export class PostsApi extends RESTDataSource {
   async getPost(id) {
     return this.get(id, undefined, {
       cacheOptions: {
-        ttl: 60 * 1, // 1 Minuto
+        ttl: 0, // 1 Minuto
       },
     });
   }
@@ -26,7 +26,7 @@ export class PostsApi extends RESTDataSource {
   async getPosts(urlParam = {}) {
     return this.get('', urlParam, {
       cacheOptions: {
-        ttl: 60 * 1, // 1 Minuto
+        ttl: 0, // 1 Minuto
       },
     });
   }
