@@ -32,6 +32,7 @@ const server = new ApolloServer({
   resolvers,
   dataSources,
   context,
+  uploads: false
 });
 
 
