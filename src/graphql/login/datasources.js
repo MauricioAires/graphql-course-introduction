@@ -50,7 +50,7 @@ export class LoginApi extends RESTDataSource {
 
     return {
       userId,
-      token
+      token: `Bearer ${token}`
     }
   }
 
