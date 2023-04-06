@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { AuthenticationError } from 'apollo-server';
+import { checkOwner } from './utils/auth-functions'
 
 export class LoginApi extends RESTDataSource {
   constructor() {
@@ -10,7 +11,8 @@ export class LoginApi extends RESTDataSource {
     this.baseURL = `${process.env.API_BASE_URL}/users`;
   }
 
-  async login(userName, password) {
+
+  async getUser(userName) {
     const user = await this.get(
       '',
       {
@@ -30,7 +32,14 @@ export class LoginApi extends RESTDataSource {
       throw new AuthenticationError('User does not exist.');
     }
 
-    const { passwordHash, id: userId } = user[0];
+    return user[0];
+  }
+
+  async login(userName, password) {
+
+    const user = await this.getUser(userName);
+
+    const { passwordHash, id: userId } = user;
 
     const isPasswordValid = await this.checkUserPassword(password, passwordHash);
 
@@ -53,6 +62,27 @@ export class LoginApi extends RESTDataSource {
       token: `Bearer ${token}`
     }
   }
+
+  async logout(userName) {
+    const user = await this.getUser(userName);
+
+    console.log({ user })
+
+    if (user.id, this.context.loggedUserId) {
+      throw new AuthenticationError('You are not this user.');
+    }
+
+    await this.patch(user.id, {
+      token: ''
+    }, {
+      cacheOptions: {
+        ttl: 0
+      }
+    })
+
+    return true
+  }
+
 
   async checkUserPassword(password, passwordHash) {
     return bcrypt.compare(password, passwordHash);
