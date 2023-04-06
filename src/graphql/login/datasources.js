@@ -106,6 +106,11 @@ export class LoginApi extends RESTDataSource {
       }
     })
 
+    /**
+     * NOTE: Mandar* o navegador apagar o cookie
+     */
+    this.context.res.clearCookie('graphqlcursojsonwebtoken')
+
     return true
   }
 
