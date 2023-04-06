@@ -12,16 +12,12 @@ export const createPostFn = async (postData, dataSource) => {
   return await dataSource.post('', { ...postInfo });
 };
 
-export const updatePostFn = async (postId, postData, dataSource) => {
-  if (!postId) {
-    throw new ValidationError(`Missing postId`);
-  }
-
+export const findPostOwner = async (postId, dataSource) => {
   /**
-   * NOTE: é muito importante que tome cuidado com cache durante
-   * update e delete, dessa forma não é utilizado a função do data source
-   * é chamado direto do banco de dados/api
-   */
+ * NOTE: é muito importante que tome cuidado com cache durante
+ * update e delete, dessa forma não é utilizado a função do data source
+ * é chamado direto do banco de dados/api
+ */
 
   const foundPost = await dataSource.get(postId, undefined, {
     cacheOptions: {
@@ -37,7 +33,18 @@ export const updatePostFn = async (postId, postData, dataSource) => {
     throw new AuthenticationError(`You cannot update this post!`);
   }
 
-  const { title, body, userId } = postData;
+  return foundPost;
+
+}
+
+export const updatePostFn = async (postId, postData, dataSource) => {
+  if (!postId) {
+    throw new ValidationError(`Missing postId`);
+  }
+
+
+  const { userId } = await findPostOwner(postId, dataSource);
+  const { title, body } = postData;
 
   if (typeof title !== 'undefined') {
     if (!title) {
@@ -66,6 +73,8 @@ export const deletePostFn = async (postId, dataSource) => {
   if (!postId) {
     throw new ValidationError(`Missing postId`);
   }
+
+  await findPostOwner(postId, dataSource);
 
   const deleted = await dataSource.delete(postId);
 
