@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 
   const passwordIsValid = await bcrypt.compare(userLoginPassword, passwordHash);
 
-  console.log(passwordHash, passwordIsValid);
+
 })();
 
 (async () => {
@@ -28,9 +28,8 @@ import jwt from 'jsonwebtoken';
     },
   );
 
-  console.log(token);
 
   const tokenData = jwt.verify(token, 'O_MEU_SECRET');
 
-  console.log(tokenData);
+
 })();
