@@ -57,6 +57,25 @@ export class LoginApi extends RESTDataSource {
       }
     })
 
+    // Response Header => Informando para o cliente criar um cookie
+
+    this.context.res.cookie(
+      '@graphql-curso:jsonwebtoken',
+      token, {
+
+      secure: false, // Serve para o navegador HTTPS => quando for para produção alterar  para true
+      httpOnly: true, // Não deve ser acessado via código,
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 dias,
+      path: '/', // Pasta onde será acessada
+      sameSite: 'none',
+      /**
+       * strict  => o cookie só pode ser usado dentro do seu
+       * lax => a requisição é feita entre abas do navegador
+       * none => pode fazer qualquer coisa com o cookie
+       */
+    }
+    )
+
     return {
       userId,
       token: `Bearer ${token}`

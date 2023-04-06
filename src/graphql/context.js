@@ -42,13 +42,12 @@ const authorizedUser = async (req) => {
 /**
  * NOTE: Essa função será executada a cada requisição
  */
-export const context = async ({ req }) => {
-
-
+export const context = async ({ req, res }) => {
 
   const loggedUserId = await authorizedUser(req);
 
   return {
-    loggedUserId
+    loggedUserId,
+    res
   }
 }
