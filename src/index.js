@@ -2,6 +2,8 @@ import { ApolloServer } from 'apollo-server';
 import { typeDefs, resolvers, dataSources } from './graphql/schema';
 import { context } from './graphql/context'
 
+
+
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -22,11 +24,19 @@ dotenv.config();
  * apos o tipo String! dessa forma irá gerar um erro caso o valor seja null
  */
 const server = new ApolloServer({
+  cors: {
+    "origin": "https://studio.apollographql.com",
+    "credentials": true
+  },
   typeDefs,
   resolvers,
   dataSources,
-  context
+  context,
 });
+
+
+
+
 
 server.listen(4003).then(({ url }) => {
   console.log(` Server listening on url: ${url} `);
