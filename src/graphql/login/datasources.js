@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { AuthenticationError } from 'apollo-server';
-import { checkOwner } from './utils/auth-functions'
 
 export class LoginApi extends RESTDataSource {
   constructor() {
@@ -57,13 +56,23 @@ export class LoginApi extends RESTDataSource {
       }
     })
 
+    /**
+     *
+     * NOTE: para que o sandbox envie os cookies para o backend é preciso
+     * ativar as configurações
+     *
+     * https://studio.apollographql.com/sandbox/explorer?overlay=connection-settings
+     *
+     * include cookies => on
+     */
+
     // Response Header => Informando para o cliente criar um cookie
 
     this.context.res.cookie(
-      '@graphql-curso:jsonwebtoken',
+      'graphqlcursojsonwebtoken',
       token, {
 
-      secure: false, // Serve para o navegador HTTPS => quando for para produção alterar  para true
+      secure: true, // Serve para o navegador HTTPS => quando for para produção alterar  para true
       httpOnly: true, // Não deve ser acessado via código,
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 dias,
       path: '/', // Pasta onde será acessada
