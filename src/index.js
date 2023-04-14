@@ -26,6 +26,7 @@ dotenv.config();
 const server = new ApolloServer({
   cors: {
     "origin": "https://studio.apollographql.com",
+    // NOTE: Informar que aceita cookies
     "credentials": true
   },
   typeDefs,
