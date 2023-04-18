@@ -35,3 +35,21 @@ Para iniciar o JSON-Server
 ```bash
   $ npm run server
 ```
+
+Criar uma migration utilizando KNEX
+
+```bash
+  $ npx knex migrate:make create-comments-table
+```
+
+Executar a migration
+
+```bash
+  $ npx knex migrate:latest
+```
+
+Desafazer a migration
+
+```bash
+  $ npx knex migrate:rollback
+```
