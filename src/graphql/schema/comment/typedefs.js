@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 
 export const commentTypeDefs = gql`
   extend type Mutation {
-    createComment: (data: CreateCommentInput ): Comment!
+    createComment(data: CreateCommentInput ): Comment!
   }
 
   type Comment {
