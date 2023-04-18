@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { UsersApi } from './user'
+import { UsersApi } from './schema/user'
 import { cookieParser } from './utils/cookie-parser'
 
 
