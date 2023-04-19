@@ -46,6 +46,7 @@ export const postTypeDefs = gql`
     user: User!
     indexRef: Int!
     createdAt: String!
+    comments: [Comment!]!
     # unixTimestamp: String!
   }
 

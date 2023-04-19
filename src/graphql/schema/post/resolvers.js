@@ -101,6 +101,11 @@ const user = async (obj, arg, { dataSources }, info) => {
   return dataSources.usersApi.userDataLoaderPostId(userId);
 };
 
+const comments = async ({ id: post_id }, arg, { dataSources }, info) => {
+
+  return dataSources.commentDB.getByPostId(post_id)
+}
+
 export const postResolvers = {
   // NOME DO TYPE => Resolvers de entrada
   Query: {
@@ -116,6 +121,7 @@ export const postResolvers = {
   // NOTE: Resolvers trivial
   Post: {
     user,
+    comments
   },
 
   // NOME DO TYPE
