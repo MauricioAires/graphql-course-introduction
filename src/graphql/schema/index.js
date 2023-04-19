@@ -1,9 +1,12 @@
 import { gql } from 'apollo-server';
+
+import { knex } from '../../knex'
+
 import { apiFiltersResolvers, apiFiltersTypeDefs } from './api-filters';
 import { loginTypeDefs, loginResolvers, LoginApi, } from './login';
 import { postTypeDefs, postResolvers, PostsApi } from './post';
 import { userTypeDefs, userResolvers, UsersApi } from './user';
-import { commentTypeDefs, commentResolvers } from './comment'
+import { commentTypeDefs, commentResolvers, CommentSQLDataSource } from './comment'
 
 const rootTypeDefs = gql`
   type Query {
@@ -45,6 +48,7 @@ export const dataSources = () => {
   return {
     postsApi: new PostsApi(),
     usersApi: new UsersApi(),
-    loginApi: new LoginApi()
+    loginApi: new LoginApi(),
+    commentDB: new CommentSQLDataSource(knex)
   };
 };
