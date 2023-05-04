@@ -23,7 +23,7 @@ dotenv.config();
  */
 const server = new ApolloServer({
   cors: {
-    origin: ['http://localhost:3001'],
+    origin: ['http://localhost:3001', 'https://studio.apollographql.com'],
     // NOTE: Informar que aceita cookies
     credentials: true,
   },
